@@ -18,14 +18,11 @@ function sharedkeylite(args)
 	end
 	
 	local sts = string.format("%s\n/%s/%s", args.date, args.account, args.table)
-	log(sts)
-	local sig = base64.encode(
+	-- log(sts)
+	args.sig = base64.encode(
 		crypto.hmac(base64.decode(args.key), sts, crypto.sha256).digest())
 
-	return {
-		signature = sign,
-		date = date
-	}
+	return args
 end
 
 return {
