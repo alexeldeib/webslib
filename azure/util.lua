@@ -2,7 +2,7 @@
 function utcdate(date)
 	local mydate = date
 	if (date == nil) then 
-		myDate = os.time()
+		mydate = os.time()
 	end
 	return os.date('!%a, %d %b %Y %H:%M:%S GMT', mydate)
 end
@@ -14,7 +14,7 @@ end
 --]]
 function sharedkeylite(args)
 	if (args.date == nil) then
-		args.date = mydate
+		args.date = utcdate()
 	end
 	
 	local sts = string.format("%s\n/%s/%s", args.date, args.account, args.table)
