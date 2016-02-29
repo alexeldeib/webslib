@@ -2,7 +2,7 @@ function trim(str)
 	if (str == nil) then
 		return nil
 	end
-	return str:match'^%s*(.*%S)' or ''
+	return str:match('^%s*(.*%S)') or ''
 end
 
 function slugify(str)
