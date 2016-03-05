@@ -106,7 +106,7 @@ end
 
 -- delete an item
 function delete(p, partitionKey, rowKey)
-	local myTable = string.format("%s(PartitionKey='%s',RowKey='%s')", p.table, partitionKey, rowKey)
+	local myTable = string.format("%s(PartitionKey='%s', RowKey='%s')", p.table, partitionKey, rowKey)
 	local skl = util.sharedkeylite({
 		account = p.account, 
 		key = p.key, 
