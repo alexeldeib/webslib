@@ -98,7 +98,7 @@ end
 -- retrieve an item
 function retrieve(p, partitionKey, rowKey)
 	return list(p, {
-		filter = q,
+		filter = string.format("(PartitionKey eq '%s' and RowKey eq '%s')", partitionKey, rowKey),
 		top = 1
 		})
 end
