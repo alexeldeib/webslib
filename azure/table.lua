@@ -132,6 +132,6 @@ return {
 	create = create,
 	retrieve = retrieve,
 	update = update,
-	delete - delete,
+	delete = delete,
 	list = list
 }
