@@ -29,7 +29,7 @@ function list(p, query)
 		queryString = string.format('%s&$select=%s', queryString, query.select)
 	end
 
-	local fullPath = string.format("%s?%s", url, string.gsub(str, "^\&+", ""))
+	local fullPath = string.format("%s?%s", url, string.gsub(queryString, "^\&+", ""))
 	local response = http.request {
 		method = 'GET',
 		url = fullPath,
