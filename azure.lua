@@ -1,1 +1,4 @@
-return { util = require('azure.util') }
+return { 
+	util = require('azure.util'), 
+	cache = require('azure.cache') 
+}
