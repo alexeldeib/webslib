@@ -106,7 +106,7 @@ end
 
 -- delete an item
 function delete(p, partitionKey, rowKey)
-	local myTable = string.format("%s(PartitionKey='%s', RowKey='%s')", p.table, partitionKey, rowKey)
+	local myTable = string.format("%s(PartitionKey='%s',RowKey='%s')", p.table, partitionKey, rowKey)
 	local skl = util.sharedkeylite({
 		account = p.account, 
 		key = p.key, 
@@ -122,7 +122,8 @@ function delete(p, partitionKey, rowKey)
 			["Authorization"] = auth,
 			["x-ms-date"] = skl.date,
 			["Accept"] = "application/json;odata=nometadata",
-			["x-ms-version"] = "2014-02-14"
+			["x-ms-version"] = "2014-02-14",
+			['If-Match'] = "*"
 		}
 	}
 	
