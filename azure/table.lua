@@ -15,6 +15,7 @@ function list(p, query)
 
 	local url = string.format("https://%s.table.core.windows.net/%s", p.account, p.table)
 	local auth = string.format('SharedKeyLite %s:%s', p.account, skl.signature)
+	local queryString = ''
 
 	if (query.filter) then
 		queryString = string.format('%s&$filter=%s', queryString, query.filter)
