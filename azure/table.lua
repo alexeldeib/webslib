@@ -70,7 +70,7 @@ function create(p, item)
 end
 
 -- update an item
-function update(p, item)
+function update(p, item, action)
 	local myTable = string.format("%s(PartitionKey='%s',RowKey='%s')", p.table, item.PartitionKey, item.RowKey)
 	local skl = util.sharedkeylite({
 		account = p.account, 
@@ -81,7 +81,7 @@ function update(p, item)
 	local auth = string.format('SharedKeyLite %s:%s', p.account, skl.signature)
 
 	local response = http.request {
-		method = 'PUT',
+		method = action or 'PUT',
 		url = url,
 		data = json.stringify(item),
 		headers = { 
