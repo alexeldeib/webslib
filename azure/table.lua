@@ -143,15 +143,18 @@ function exec(p, action)
 	if (action == 'POST') then
 		url = string.format("https://%s.table.core.windows.net/Tables", p.account)
 		local item = { TableName = p.table }
+		local postdata = json.stringify(item)
 		local response = http.request {
 			method = action,
 			url = url,
-			data = json.stringify(item),
+			data = postdata,
 			headers = { 
 				["Authorization"] = auth,
 				["x-ms-date"] = skl.date,
+				["Content-Type"] = "application/json",
 				["Accept"] = "application/json;odata=nometadata",
-				["x-ms-version"] = "2014-02-14"
+				["x-ms-version"] = "2014-02-14",
+				["Content-Length"] = string.len(postdata)
 			}
 		}
 
@@ -163,7 +166,7 @@ function exec(p, action)
 			headers = { 
 				["Authorization"] = auth,
 				["x-ms-date"] = skl.date,
-				["Accept"] = "application/json;odata=nometadata",
+				["Content-Type"] = "application/atom+xml",
 				["x-ms-version"] = "2014-02-14"
 			}
 		}
