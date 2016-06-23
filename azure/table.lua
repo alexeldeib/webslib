@@ -153,8 +153,7 @@ function exec(p, action)
 				["x-ms-date"] = skl.date,
 				["Content-Type"] = "application/json",
 				["Accept"] = "application/json;odata=nometadata",
-				["x-ms-version"] = "2014-02-14",
-				["Content-Length"] = string.len(postdata)
+				["x-ms-version"] = "2014-02-14"
 			}
 		}
 
@@ -166,7 +165,8 @@ function exec(p, action)
 			headers = { 
 				["Authorization"] = auth,
 				["x-ms-date"] = skl.date,
-				["Content-Type"] = "application/atom+xml",
+				["Content-Type"] = "application/json",
+				["Accept"] = "application/json;odata=nometadata",
 				["x-ms-version"] = "2014-02-14"
 			}
 		}
