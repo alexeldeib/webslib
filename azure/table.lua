@@ -130,6 +130,46 @@ function delete(p, partitionKey, rowKey)
 	return response
 end
 
+-- delete table
+function table(p, action)
+	local skl = util.sharedkeylite({
+		account = p.account, 
+		key = p.key, 
+		table = p.table })
+	
+	local url = string.format("https://%s.table.core.windows.net/Tables(%s)", p.account, p.table)
+	local auth = string.format('SharedKeyLite %s:%s', p.account, skl.signature)
+
+	if (action == 'POST') then
+		local response = http.request {
+			method = action,
+			url = url,
+			data = json.stringify({ TableName = p.table }),
+			headers = { 
+				["Authorization"] = auth,
+				["x-ms-date"] = skl.date,
+				["Accept"] = "application/json;odata=nometadata",
+				["x-ms-version"] = "2014-02-14",
+				['If-Match'] = "*"
+			}
+		}
+	else if (action == 'DELETE') then
+		local response = http.request {
+			method = action,
+			url = url,
+			headers = { 
+				["Authorization"] = auth,
+				["x-ms-date"] = skl.date,
+				["Accept"] = "application/json;odata=nometadata",
+				["x-ms-version"] = "2014-02-14",
+				['If-Match'] = "*"
+			}
+		}
+	end
+	
+	return response
+end
+
 return {
 	create = create,
 	retrieve = retrieve,
