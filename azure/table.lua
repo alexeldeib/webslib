@@ -135,7 +135,7 @@ function exec(p, action)
 	local skl = util.sharedkeylite({
 		account = p.account, 
 		key = p.key, 
-		table = p.table })
+		table = 'Tables' })
 	
 	local url = string.format("https://%s.table.core.windows.net/Tables('%s')", p.account, p.table)
 	local auth = string.format('SharedKeyLite %s:%s', p.account, skl.signature)
