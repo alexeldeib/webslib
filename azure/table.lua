@@ -131,16 +131,17 @@ function delete(p, partitionKey, rowKey)
 end
 
 -- delete table
-function tableop(p, action)
+function exec(p, action)
 	local skl = util.sharedkeylite({
 		account = p.account, 
 		key = p.key, 
 		table = p.table })
 	
-	local url = string.format("https://%s.table.core.windows.net/Tables(%s)", p.account, p.table)
+	local url = string.format("https://%s.table.core.windows.net/Tables('%s')", p.account, p.table)
 	local auth = string.format('SharedKeyLite %s:%s', p.account, skl.signature)
 
 	if (action == 'POST') then
+		url = string.format("https://%s.table.core.windows.net/Tables", p.account)
 		local item = { TableName = p.table }
 		local response = http.request {
 			method = action,
@@ -178,5 +179,5 @@ return {
 	update = update,
 	delete = delete,
 	list = list,
-	tableop = tableop
+	exec = exec
 }
