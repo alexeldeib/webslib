@@ -159,6 +159,10 @@ function exec(p, action)
 
 		return response
 	elseif (action == 'DELETE') then
+		skl = util.sharedkeylite({
+			account = p.account, 
+			key = p.key, 
+			table = p.table })
 		local response = http.request {
 			method = action,
 			url = url,
