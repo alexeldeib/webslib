@@ -141,10 +141,11 @@ function tableop(p, action)
 	local auth = string.format('SharedKeyLite %s:%s', p.account, skl.signature)
 
 	if (action == 'POST') then
+		local item = { TableName = p.table }
 		local response = http.request {
 			method = action,
 			url = url,
-			data = json.stringify({ TableName = p.table }),
+			data = json.stringify(item),
 			headers = { 
 				["Authorization"] = auth,
 				["x-ms-date"] = skl.date,
@@ -153,7 +154,9 @@ function tableop(p, action)
 				['If-Match'] = "*"
 			}
 		}
-	else if (action == 'DELETE') then
+
+		return response
+	elseif (action == 'DELETE') then
 		local response = http.request {
 			method = action,
 			url = url,
@@ -165,9 +168,8 @@ function tableop(p, action)
 				['If-Match'] = "*"
 			}
 		}
+		return response
 	end
-	
-	return response
 end
 
 return {
