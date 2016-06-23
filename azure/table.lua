@@ -151,8 +151,7 @@ function exec(p, action)
 				["Authorization"] = auth,
 				["x-ms-date"] = skl.date,
 				["Accept"] = "application/json;odata=nometadata",
-				["x-ms-version"] = "2014-02-14",
-				['If-Match'] = "*"
+				["x-ms-version"] = "2014-02-14"
 			}
 		}
 
@@ -165,8 +164,7 @@ function exec(p, action)
 				["Authorization"] = auth,
 				["x-ms-date"] = skl.date,
 				["Accept"] = "application/json;odata=nometadata",
-				["x-ms-version"] = "2014-02-14",
-				['If-Match'] = "*"
+				["x-ms-version"] = "2014-02-14"
 			}
 		}
 		return response
