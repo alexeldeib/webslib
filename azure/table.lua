@@ -131,7 +131,7 @@ function delete(p, partitionKey, rowKey)
 end
 
 -- delete table
-function table(p, action)
+function tableop(p, action)
 	local skl = util.sharedkeylite({
 		account = p.account, 
 		key = p.key, 
@@ -175,5 +175,6 @@ return {
 	retrieve = retrieve,
 	update = update,
 	delete = delete,
-	list = list
+	list = list,
+	tableop = tableop
 }
