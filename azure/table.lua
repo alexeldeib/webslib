@@ -162,16 +162,14 @@ function exec(p, action)
 		skl = util.sharedkeylite({
 			account = p.account, 
 			key = p.key, 
-			table = p.table })
+			table = string.format("%()", p.table) })
 		local response = http.request {
 			method = action,
 			url = url,
 			headers = { 
 				["Authorization"] = auth,
 				["x-ms-date"] = skl.date,
-				["Content-Type"] = "application/json",
-				["Accept"] = "application/json;odata=nometadata",
-				["x-ms-version"] = "2014-02-14"
+				["Content-Type"] = "application/atom+xml"
 			}
 		}
 		return response
