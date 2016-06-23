@@ -162,7 +162,7 @@ function exec(p, action)
 		skl = util.sharedkeylite({
 			account = p.account, 
 			key = p.key, 
-			table = string.format("%()", p.table) })
+			table = string.format("%s()", p.table) })
 		local response = http.request {
 			method = action,
 			url = url,
