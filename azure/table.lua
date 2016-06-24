@@ -170,7 +170,9 @@ function exec(p, action)
 			headers = { 
 				["Authorization"] = auth,
 				["x-ms-date"] = skl.date,
-				["Content-Type"] = "application/atom+xml"
+				["Accept"] = "application/json;odata=minimalmetadata",
+				["Content-Type"] = "application/json",
+				["x-ms-version"] = "2015-04-05"
 			}
 		}
 		return response
