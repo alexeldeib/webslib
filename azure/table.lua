@@ -131,52 +131,25 @@ function delete(p, partitionKey, rowKey)
 end
 
 -- delete table
-function exec(p, action)
-	local skl = util.sharedkeylite({
-		account = p.account, 
-		key = p.key, 
-		table = 'Tables' })
-	
-	local url = string.format("https://%s.table.core.windows.net/Tables('%s')", p.account, p.table)
+function getHeader(action, skl)	
 	local auth = string.format('SharedKeyLite %s:%s', p.account, skl.signature)
-
-	if (action == 'POST') then
-		url = string.format("https://%s.table.core.windows.net/Tables", p.account)
-		local item = { TableName = p.table }
-		local postdata = json.stringify(item)
-		local response = http.request {
-			method = action,
-			url = url,
-			data = postdata,
-			headers = { 
+	local rst = 
+	if (action == 'GET' or action == 'DELETE') then
+		return  { 
 				["Authorization"] = auth,
 				["x-ms-date"] = skl.date,
-				["Content-Type"] = "application/json",
 				["Accept"] = "application/json;odata=nometadata",
-				["x-ms-version"] = "2014-02-14"
-			}
-		}
-
-		return response
-	elseif (action == 'DELETE') then
-		--[[skl = util.sharedkeylite({
-			account = p.account, 
-			key = p.key, 
-			table = string.format("%s()", p.table) })
-			]]--
-		local response = http.request {
-			method = action,
-			url = url,
-			headers = { 
-				["Authorization"] = auth,
-				["x-ms-date"] = skl.date,
-				["Accept"] = "application/json;odata=minimalmetadata",
-				["Content-Type"] = "application/json",
 				["x-ms-version"] = "2015-04-05"
 			}
-		}
-		return response
 	end
+
+	return { 
+			["Authorization"] = auth,
+			["x-ms-date"] = skl.date,
+			["Content-Type"] = "application/json",
+			["Accept"] = "application/json;odata=nometadata",
+			["x-ms-version"] = "2015-04-05"
+		}
 end
 
 return {
@@ -185,5 +158,5 @@ return {
 	update = update,
 	delete = delete,
 	list = list,
-	exec = exec
+	getHeader = getHeader
 }
