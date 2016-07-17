@@ -132,7 +132,7 @@ end
 
 -- delete table
 function getHeader(action, skl)	
-	local auth = string.format('SharedKeyLite %s:%s', p.account, skl.signature)
+	local auth = string.format('SharedKeyLite %s:%s', skl.account, skl.signature)
 	if (action == 'GET' or action == 'DELETE') then
 		return  { 
 				["Authorization"] = auth,
